@@ -5,5 +5,5 @@ events.on("exec", (brigadeEvent, project) => {
 });
 
 events.on("something_important", () => {
-  console.log("hello, something!");
+  console.log("hello, something!  x2 :)");
 });
