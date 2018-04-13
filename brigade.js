@@ -1,9 +1,8 @@
 const { events } = require("brigadier");
 
-events.on("exec", (brigadeEvent, project) => {
-  console.log("Hello world!");
-});
-
-events.on("something_important", () => {
+events.on("start_train", (event, project) => {
   console.log("hello, something!  x2 :)");
+  console.log(event);
+  console.log(event.payload);
+  console.log(project);
 });
