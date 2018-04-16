@@ -4,8 +4,6 @@ events.on("train", async (event, project) => {
   const payload = JSON.parse(event.payload);
   const classifier = payload.classifier;
 
-  console.log("creating job.");
-
   const train = new Job(`${classifier}-train`, project.secrets.training_image);
 
   const env = {
@@ -17,10 +15,9 @@ events.on("train", async (event, project) => {
 
   train.env = env;
   train.imagePullSecrets = "acrcredentials";
-
-  console.log("running job");
+  train.imageForcePull = true;
 
   const trainingResult = await train.run();
 
-  console.log(trainingResult);
+  console.log(trainingResult.data);
 });
