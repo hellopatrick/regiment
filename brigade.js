@@ -15,8 +15,8 @@ events.on("start_train", async (event, project) => {
     TRAINING_STEPS: 4000
   };
 
-  job.env = env;
-  job.imagePullSecrets = "acrcredentials";
+  train.env = env;
+  train.imagePullSecrets = "acrcredentials";
 
   console.log("running job");
 
