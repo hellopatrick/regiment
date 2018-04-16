@@ -1,8 +1,22 @@
-const { events } = require("brigadier");
+const { events, Job } = require("brigadier");
 
-events.on("start_train", (event, project) => {
-  console.log("hello, something!  x2 :)");
-  console.log(event);
-  console.log(event.payload);
-  console.log(project);
+events.on("start_train", async (event, project) => {
+  const payload = JSON.parse(event.payload);
+  const classifier = payload.classifier;
+
+  const train = new Job(
+    `${classifier}-train`,
+    "lostmaruacr.azurecr.io/tf-poets-training:latest"
+  );
+
+  const env = {
+    ACCOUNT_NAME: project.secrets.azure_name,
+    ACCOUNT_KEY: project.secrets.azure_name,
+    CLASSIFIER: classifier,
+    TRAINING_STEPS: 4000
+  };
+
+  const trainingResult = await train.run();
+
+  console.log(trainingResult);
 });
