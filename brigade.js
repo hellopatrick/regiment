@@ -1,6 +1,6 @@
 const { events, Job } = require("brigadier");
 
-events.on("start_train", async (event, project) => {
+events.on("train", async (event, project) => {
   const payload = JSON.parse(event.payload);
   const classifier = payload.classifier;
 
