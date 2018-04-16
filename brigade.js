@@ -4,14 +4,11 @@ events.on("start_train", async (event, project) => {
   const payload = JSON.parse(event.payload);
   const classifier = payload.classifier;
 
-  const train = new Job(
-    `${classifier}-train`,
-    "lostmaruacr.azurecr.io/tf-poets-training:latest"
-  );
+  const train = new Job(`${classifier}-train`, project.secrets.training_image);
 
   const env = {
     ACCOUNT_NAME: project.secrets.azure_name,
-    ACCOUNT_KEY: project.secrets.azure_name,
+    ACCOUNT_KEY: project.secrets.azure_key,
     CLASSIFIER: classifier,
     TRAINING_STEPS: 4000
   };
