@@ -2,7 +2,7 @@ const { events, Job } = require("brigadier");
 
 events.on("train", async (event, project) => {
   const payload = JSON.parse(event.payload);
-  const classifier = payload.classifier;
+  const { classifier, trainingSteps = "4000" } = payload;
 
   const train = new Job(`${classifier}-train`, project.secrets.training_image);
 
@@ -10,7 +10,7 @@ events.on("train", async (event, project) => {
     ACCOUNT_NAME: project.secrets.azure_name,
     ACCOUNT_KEY: project.secrets.azure_key,
     CLASSIFIER: classifier,
-    TRAINING_STEPS: "4000",
+    TRAINING_STEPS: trainingSteps,
   };
 
   train.env = env;
