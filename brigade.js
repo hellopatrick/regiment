@@ -16,7 +16,7 @@ events.on("train", async (event, project) => {
   train.env = env;
   train.imagePullSecrets = "acrcredentials";
   train.imageForcePull = true;
-  train.timeout = 60 * 60 * 1000;
+  train.timeout = 120 * 60 * 1000;
 
   const result = await train.run();
   const name = result.data.trim();
