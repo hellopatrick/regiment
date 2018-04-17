@@ -10,14 +10,16 @@ events.on("train", async (event, project) => {
     ACCOUNT_NAME: project.secrets.azure_name,
     ACCOUNT_KEY: project.secrets.azure_key,
     CLASSIFIER: classifier,
-    TRAINING_STEPS: "4000"
+    TRAINING_STEPS: "4000",
   };
 
   train.env = env;
   train.imagePullSecrets = "acrcredentials";
   train.imageForcePull = true;
 
-  const trainingResult = await train.run();
+  const result = await train.run();
 
-  console.log(trainingResult.data);
+  const name = result.data.trim();
+
+  console.log(`result: ${name}`);
 });
