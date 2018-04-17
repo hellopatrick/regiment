@@ -1,0 +1,24 @@
+{
+  "name": "regiment",
+  "version": "0.1.0",
+  "description": "a brigade pipeline.",
+  "main": "brigade.js",
+  "homepage": "https://gfycat.com/",
+  "author": "Patrick Rogers <patrick@gfycat.com> (https://gfycat.com/)",
+  "private": true,
+  "license": "UNLICENSED",
+  "dependencies": {
+    "ulid": "^2.3.0",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "eslint-plugin-node": "^6.0.1"
+  },
+  "engines": {
+    "node": "^8.11.1"
+  },
+  "prettier": {
+    "parser": "flow",
+    "trailingComma": "es5"
+  }
+}
