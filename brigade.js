@@ -18,8 +18,7 @@ events.on("train", async (event, project) => {
   train.imageForcePull = true;
 
   const result = await train.run();
-
   const name = result.data.trim();
 
-  console.log(`result: ${name}`);
+  console.log(`uuid => "${name}"`);
 });
