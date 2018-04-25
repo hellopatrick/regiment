@@ -4,6 +4,8 @@ const { events, Job } = require("brigadier"); // eslint-disable-line node/no-mis
 
 events.on("train", async (event, project) => {
   const payload = JSON.parse(event.payload);
+  const build = event.buildID;
+
   const { classifier, trainingSteps = "4000" } = payload;
 
   const train = new Job(`${classifier}-train`, project.secrets.training_image);
@@ -13,7 +15,7 @@ events.on("train", async (event, project) => {
     ACCOUNT_KEY: project.secrets.azure_key,
     CLASSIFIER: classifier,
     TRAINING_STEPS: trainingSteps,
-    BUILD: event.buildID,
+    BUILD: build,
   };
 
   train.env = env;
@@ -21,8 +23,7 @@ events.on("train", async (event, project) => {
   train.imageForcePull = true;
   train.timeout = 90 * 60 * 1000;
 
-  const result = await train.run();
-  const name = result.data.trim();
+  await train.run();
 
-  console.log(`uuid => "${name}"`);
+  console.log(`Results located in: ${classifier}/${build}/`);
 });

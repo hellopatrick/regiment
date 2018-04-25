@@ -4,11 +4,13 @@ module.exports = {
     browser: false,
     es6: true,
   },
-  extends: ["eslint:recommended", "plugin:node/recommended"],
   parserOptions: {
     ecmaVersion: 8,
   },
+  plugins: ["node"],
+  extends: ["eslint:recommended", "plugin:node/recommended"],
   rules: {
     "node/exports-style": ["error", "module.exports"],
+    "no-console": 0,
   },
 };
