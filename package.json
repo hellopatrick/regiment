@@ -7,11 +7,8 @@
   "author": "Patrick Rogers <patrick@gfycat.com> (https://gfycat.com/)",
   "private": true,
   "license": "UNLICENSED",
-  "dependencies": {
-    "ulid": "^2.3.0",
-    "yamljs": "^0.3.0"
-  },
   "devDependencies": {
+    "eslint": "^4.19.1",
     "eslint-plugin-node": "^6.0.1"
   },
   "engines": {
