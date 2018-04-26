@@ -24,6 +24,8 @@ events.on("train", async (event, project) => {
   train.imagePullSecrets = "acrcredentials";
   train.imageForcePull = true;
   train.timeout = 90 * 60 * 1000;
+  train.useSource = false;
+
   if (host) train.host.name = host;
 
   await train.run();
@@ -52,6 +54,8 @@ events.on("train", async (event, project) => {
   notify.imagePullSecrets = "acrcredentials";
   notify.imageForcePull = true;
   notify.timeout = 120 * 1000;
+  notify.useSource = false;
+
   if (host) notify.host.name = host;
 
   await notify.run();
