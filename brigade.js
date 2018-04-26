@@ -6,6 +6,8 @@ events.on("train", async (event, project) => {
   const payload = JSON.parse(event.payload);
   const build = event.buildID;
 
+  const host = project.secrets.host_name || null;
+
   const { classifier, trainingSteps = "4000" } = payload;
 
   const train = new Job(`${classifier}-train`, project.secrets.training_image);
@@ -22,6 +24,7 @@ events.on("train", async (event, project) => {
   train.imagePullSecrets = "acrcredentials";
   train.imageForcePull = true;
   train.timeout = 90 * 60 * 1000;
+  if (host) train.host.name = host;
 
   await train.run();
 
@@ -48,7 +51,8 @@ events.on("train", async (event, project) => {
   notify.env = notifyEnv;
   notify.imagePullSecrets = "acrcredentials";
   notify.imageForcePull = true;
-  notify.timeout = 60 * 1000;
+  notify.timeout = 120 * 1000;
+  if (host) notify.host.name = host;
 
   await notify.run();
 
