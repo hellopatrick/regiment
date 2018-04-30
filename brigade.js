@@ -33,9 +33,19 @@ events.on("train", async (event, project) => {
     project.secrets.notifier_image
   );
 
+  const now = new Date();
+  const timestamp = now.getTime();
+
+  const msg = {
+    classifier,
+    build,
+    timestamp,
+  };
+
   const notifyEnv = {
-    CLASSIFIER: classifier,
-    BUILD: build,
+    EXCHANGE: "classifier.pipeline",
+    EVENT: "fresh",
+    MESSAGE: JSON.stringify(msg),
     RABBITMQ_HOST: project.secrets.rabbitmq_name,
     RABBITMQ_USER: "user",
     RABBITMQ_PASS: {
