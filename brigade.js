@@ -6,7 +6,13 @@ events.on("train", async (event, project) => {
   const payload = JSON.parse(event.payload);
   const build = event.buildID;
 
-  const { classifier, trainingSteps = "4000" } = payload;
+  const {
+    classifier,
+    trainingSteps = "4000",
+    inputs = "bottlenecks.inception",
+    modelType = "inception",
+    inputLayer = "import/input/BottleneckInputPlaceholder",
+  } = payload;
 
   const train = new Job(`${classifier}-train`, project.secrets.training_image);
 
@@ -40,6 +46,9 @@ events.on("train", async (event, project) => {
     classifier,
     build,
     timestamp,
+    inputs,
+    modelType,
+    inputLayer,
   };
 
   const notifyEnv = {
